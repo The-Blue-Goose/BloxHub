@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BloxHub.main.iml" filepath="$PROJECT_DIR$/.idea/modules/BloxHub.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BlueGose.BloxHub.main.iml" filepath="$PROJECT_DIR$/.idea/modules/BlueGose.BloxHub.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Spigot Plugins.BloxHub.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Spigot Plugins.BloxHub.main.iml" />
     </modules>
   </component>
 </project>

@@ -11,11 +11,10 @@ public class GamemodeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
         GameMode targetMode = null;
         String cmdName = cmd.getName().toLowerCase();
 
-        // Determine the target gamemode from the command or args
+        // Determine the target gamemode based on the command or first argument
         switch (cmdName) {
             case "gmc":
                 targetMode = GameMode.CREATIVE;
@@ -30,38 +29,37 @@ public class GamemodeCommand implements CommandExecutor {
                 targetMode = GameMode.SPECTATOR;
                 break;
             case "gm":
-                if (args.length > 0) {
-                    switch (args[0].toLowerCase()) {
-                        case "c": case "1": targetMode = GameMode.CREATIVE; break;
-                        case "s": case "0": targetMode = GameMode.SURVIVAL; break;
-                        case "a": case "2": targetMode = GameMode.ADVENTURE; break;
-                        case "sp": case "3": targetMode = GameMode.SPECTATOR; break;
-                        default:
-                            sender.sendMessage("§cInvalid gamemode. Use 0-3 or c/s/a/sp.");
-                            return true;
-                    }
-                } else {
+                if (args.length == 0) {
                     sender.sendMessage("§cUsage: /gm <mode> [player]");
                     return true;
                 }
+                switch (args[0].toLowerCase()) {
+                    case "c": case "1": targetMode = GameMode.CREATIVE; break;
+                    case "s": case "0": targetMode = GameMode.SURVIVAL; break;
+                    case "a": case "2": targetMode = GameMode.ADVENTURE; break;
+                    case "sp": case "3": targetMode = GameMode.SPECTATOR; break;
+                    default:
+                        sender.sendMessage("§cInvalid gamemode. Use 0-3 or c/s/a/sp.");
+                        return true;
+                }
                 break;
-        }
-
-        if (targetMode == null) {
-            sender.sendMessage("§cSomething went wrong. Unknown command.");
-            return true;
+            default:
+                sender.sendMessage("§cUnknown command.");
+                return true;
         }
 
         // Determine the target player
         Player target;
-        if ((cmdName.equals("gm") && args.length > 1) || (!cmdName.equals("gm") && args.length >= 1)) {
-            String targetName = args[args.length - 1];
-            target = Bukkit.getPlayerExact(targetName);
+        if ((cmdName.equals("gm") && args.length >= 2) || (!cmdName.equals("gm") && args.length == 1)) {
+            // A target player was specified
+            String playerName = args[args.length - 1];
+            target = Bukkit.getPlayerExact(playerName);
             if (target == null) {
-                sender.sendMessage("§cPlayer not found: " + targetName);
+                sender.sendMessage("§cPlayer not found: " + playerName);
                 return true;
             }
         } else {
+            // No target player specified, default to self
             if (!(sender instanceof Player)) {
                 sender.sendMessage("§cOnly players can change their own gamemode.");
                 return true;
@@ -69,6 +67,7 @@ public class GamemodeCommand implements CommandExecutor {
             target = (Player) sender;
         }
 
+        // Set gamemode
         target.setGameMode(targetMode);
         target.sendMessage("§aYour gamemode has been set to §e" + targetMode.name() + "§a.");
         if (!target.equals(sender)) {

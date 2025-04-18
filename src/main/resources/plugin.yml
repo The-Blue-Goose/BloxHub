@@ -1,5 +1,5 @@
 name: BloxHub
-version: '1.0-SNAPSHOT'
+version: '0.1.0-TestVer'
 main: BlueGoose.bloxHub.BloxHub
 authors: [The_Blue_Goose, Jxsh]
 api-version: '1.18'
@@ -8,45 +8,73 @@ commands:
   setspawn:
     description: Sets the world spawn point to your location or provided coordinates.
     usage: /<command> [x] [y] [z]
-    permission: bloxhub.setspawn
+    permission: blox.setspawn
     aliases: [sets, setsp]
   spawn:
     description: Teleports you to the world spawn point.
     usage: /<command>
-    permission: bloxhub.spawn
-    aliases: [s]
+    permission: blox.spawn
+    aliases: [s, hub, lobby]
+
   gm:
     description: Toggles or sets your gamemode.
-    usage: /<command> [mode]
-    permission: bloxhub.gamemode
+    usage: /<command> [mode] [player]
+    permission: blox.gamemode
   gmc:
     description: Sets gamemode to creative.
-    usage: /<command>
-    permission: bloxhub.gamemode
+    usage: /<command> [player]
+    permission: blox.gamemode
   gms:
     description: Sets gamemode to survival.
-    usage: /<command>
-    permission: bloxhub.gamemode
+    usage: /<command> [player]
+    permission: blox.gamemode
   gma:
     description: Sets gamemode to adventure.
-    usage: /<command>
-    permission: bloxhub.gamemode
+    usage: /<command> [player]
+    permission: blox.gamemode
   gmsp:
     description: Sets gamemode to spectator.
-    usage: /<command>
-    permission: bloxhub.gamemode
+    usage: /<command> [player]
+    permission: blox.gamemode
+
   scoreboard:
     description: Toggle your scoreboard visibility.
     usage: /<command>
-    permission: bloxhub.scoreboard
+    permission: blox.scoreboard
     aliases: [ sb ]
 
+  heal:
+    description: Fully heals a player (health + hunger + 3/10 saturation).
+    usage: /<command> [player]
+    permission: blox.heal
+  feed:
+    description: Fills hunger and saturation.
+    usage: /<command> [player]
+    permission: blox.feed
+
+  fly:
+    description: Toggles flight mode.
+    usage: /<command> [player]
+    permission: blox.fly
+  god:
+    description: Toggles god mode (no damage).
+    usage: /<command> [player]
+    permission: blox.god
+
 permissions:
-  bloxhub.setspawn:
+  blox.setspawn:
     default: op
-  bloxhub.spawn:
+  blox.spawn:
     default: true
-  bloxhub.gamemode:
+  blox.gamemode:
     default: op
-  bloxhub.scoreboard:
+  blox.scoreboard:
     default: true
+  blox.heal:
+    default: op
+  blox.feed:
+    default: op
+  blox.fly:
+    default: op
+  blox.god:
+    default: op

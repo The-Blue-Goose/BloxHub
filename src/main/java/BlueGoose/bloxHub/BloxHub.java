@@ -23,6 +23,17 @@ public final class BloxHub extends JavaPlugin {
         getCommand("gmsp").setExecutor(gamemodeCommand);
         getCommand("gm").setExecutor(gamemodeCommand);
 
+        //Heal+Feed Commands
+        HealFeedCommand healFeedCommand = new HealFeedCommand();
+        getCommand("heal").setExecutor(healFeedCommand);
+        getCommand("feed").setExecutor(healFeedCommand);
+
+        //Fly+God Command
+        FlyGodCommand flyGodCommand = new FlyGodCommand();
+        getCommand("fly").setExecutor(flyGodCommand);
+        getCommand("god").setExecutor(flyGodCommand);
+        getServer().getPluginManager().registerEvents(new GodModeListener(flyGodCommand), this);
+
         //TabLost
         getServer().getPluginManager().registerEvents(new SpawnJoinListener(), this);
         getServer().getPluginManager().registerEvents(new RespawnListener(), this);
