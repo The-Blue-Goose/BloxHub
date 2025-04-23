@@ -1,4 +1,4 @@
-package BlueGoose.bloxHub;
+package Commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

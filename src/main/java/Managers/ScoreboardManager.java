@@ -1,4 +1,4 @@
-package BlueGoose.bloxHub;
+package Managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

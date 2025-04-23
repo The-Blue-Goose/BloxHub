@@ -1,4 +1,4 @@
-package BlueGoose.bloxHub;
+package Listeners;
 
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;

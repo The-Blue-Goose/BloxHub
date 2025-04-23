@@ -1,4 +1,4 @@
-package BlueGoose.bloxHub;
+package Listeners;
 
 import org.bukkit.Location;
 import org.bukkit.World;

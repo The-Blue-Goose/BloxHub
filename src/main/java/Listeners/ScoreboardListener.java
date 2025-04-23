@@ -1,5 +1,7 @@
-package BlueGoose.bloxHub;
+package Listeners;
 
+import Commands.ScoreboardCommand;
+import Managers.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -1,7 +1,6 @@
-package BlueGoose.bloxHub;
+package Listeners;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import Commands.NametagEdit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
