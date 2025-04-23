@@ -78,3 +78,6 @@ permissions:
     default: op
   blox.god:
     default: op
+  blox.bypass.blockedcommands:
+    description: Allows use of blocked server commands like /pl and /version
+    default: op

@@ -1,5 +1,10 @@
 # config.yml
 
+# chat messages
+messages:
+  unknown_command: "§cUnknown command. Type /help for help."
+  no_permission: "§cYou do not have permission to use this command."
+
 # Default spawn locations per world
 world_spawns:
   world:
@@ -15,6 +20,7 @@ world_spawns:
     y: 128
     z: 100
 
+# Server Info Display Config
 tablist:
   header: |
     §a§lHOT §2§lBLOX
