@@ -15,7 +15,7 @@ public class PermissionManager {
         if (player.hasPermission(permission)) {
             return true;
         } else {
-            String msg = plugin.getConfig().getString("messages.no-permission", "§cYou do not have permission to use this command.");
+            String msg = plugin.getConfig().getString("chat.no-permission", "§cYou do not have permission to use this command.");
             player.sendMessage(msg);
             return false;
         }

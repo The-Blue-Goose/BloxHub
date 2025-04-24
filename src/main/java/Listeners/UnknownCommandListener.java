@@ -36,7 +36,7 @@ public class UnknownCommandListener implements Listener {
         String[] parts = message.substring(1).split(" ");
         String baseCommand = parts[0].toLowerCase();
 
-        String unknownMsg = plugin.getConfig().getString("messages.unknown_command", "§cUnknown command. Type /help for help.");
+        String unknownMsg = plugin.getConfig().getString("chat.unknown_command", "§cUnknown command. Type /help for help.");
 
         // Block sensitive server commands
         if (blockedCommands.contains(baseCommand)) {

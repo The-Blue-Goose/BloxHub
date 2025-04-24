@@ -3,9 +3,13 @@
 # This plugin was made for the HotBlox Server
 
 # chat messages
-messages:
+chat:
+  format: "%prefix%§r%player% §8» §r§f%message%"
   unknown_command: "§cUnknown command. Type /help for help."
   no_permission: "§cYou do not have permission to use this command."
+  join_message: "§a%player% just joined!"
+  first_join_message: "§bWelcome %player% to BloxHub for the first time!"
+  death_message: "§c%player% died."
 
 # Default spawn locations per world
 world_spawns:

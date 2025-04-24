@@ -22,11 +22,12 @@ public final class BloxHub extends JavaPlugin {
         TeleportManager teleportManager = new TeleportManager();
 
         // Register event listeners
-        getServer().getPluginManager().registerEvents(new SpawnJoinListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new RespawnListener(), this);
         getServer().getPluginManager().registerEvents(new TabListListener(this), this);
         getServer().getPluginManager().registerEvents(new GodModeListener(new FlyGodCommand()), this);
         getServer().getPluginManager().registerEvents(unknownCommandListener, this);
+        getServer().getPluginManager().registerEvents(new ChatListener(this), this);
 
         // Register scoreboard
         ScoreboardManager scoreboardManager = new ScoreboardManager(this);
