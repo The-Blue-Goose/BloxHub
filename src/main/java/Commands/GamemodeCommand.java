@@ -29,7 +29,8 @@ public class GamemodeCommand implements CommandExecutor {
                 targetMode = GameMode.SPECTATOR;
                 break;
             case "gm":
-                if (args.length == 0) { // No arguments — gamemode toggle
+                // If no arguments are given, toggle the sender's own gamemode
+                if (args.length == 0) {
                     if (!(sender instanceof Player)) {
                         sender.sendMessage("§cOnly players can toggle their own gamemode.");
                         return true;
@@ -37,6 +38,7 @@ public class GamemodeCommand implements CommandExecutor {
                     Player player = (Player) sender;
                     GameMode current = player.getGameMode();
 
+                    // Toggle between Creative/Spectator and Adventure
                     if (current == GameMode.CREATIVE || current == GameMode.SPECTATOR) {
                         targetMode = GameMode.ADVENTURE;
                     } else {
@@ -46,7 +48,8 @@ public class GamemodeCommand implements CommandExecutor {
                     player.setGameMode(targetMode);
                     player.sendMessage("§aYour gamemode has been toggled to §e" + targetMode.name() + "§a.");
                     return true;
-                } // Yes Arguments - parse as usual
+                }
+                // If arguments are provided, parse them as gamemode type
                 switch (args[0].toLowerCase()) {
                     case "c": case "1": targetMode = GameMode.CREATIVE; break;
                     case "s": case "0": targetMode = GameMode.SURVIVAL; break;
@@ -58,14 +61,15 @@ public class GamemodeCommand implements CommandExecutor {
                 }
                 break;
             default:
+                // Unknown command was entered
                 sender.sendMessage("§cUnknown command.");
                 return true;
         }
 
         // Determine the target player
         Player target;
+        // If using /gm and two args are provided, or any /gm* command with one arg — assume a player is being targeted
         if ((cmdName.equals("gm") && args.length >= 2) || (!cmdName.equals("gm") && args.length == 1)) {
-            // A target player was specified
             String playerName = args[args.length - 1];
             target = Bukkit.getPlayerExact(playerName);
             if (target == null) {
@@ -73,7 +77,7 @@ public class GamemodeCommand implements CommandExecutor {
                 return true;
             }
         } else {
-            // No target player specified, default to self
+            // No target specified — apply to the sender if they're a player
             if (!(sender instanceof Player)) {
                 sender.sendMessage("§cOnly players can change their own gamemode.");
                 return true;
@@ -81,9 +85,10 @@ public class GamemodeCommand implements CommandExecutor {
             target = (Player) sender;
         }
 
-        // Set gamemode
+        // Apply the gamemode change
         target.setGameMode(targetMode);
         target.sendMessage("§aYour gamemode has been set to §e" + targetMode.name() + "§a.");
+        // Notify sender if they changed someone else's gamemode
         if (!target.equals(sender)) {
             sender.sendMessage("§aSet §e" + target.getName() + "§a's gamemode to §e" + targetMode.name() + "§a.");
         }

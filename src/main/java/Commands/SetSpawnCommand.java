@@ -11,6 +11,7 @@ public class SetSpawnCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        // Only allow players to use this command
         if (!(sender instanceof Player)) {
             sender.sendMessage("Only players can use this command.");
             return true;
@@ -20,12 +21,15 @@ public class SetSpawnCommand implements CommandExecutor {
         World world = player.getWorld();
         Location spawnLocation;
 
+        // If coordinates are provided, parse them
         if (args.length == 3) {
             try {
+                // Support relative (~) and absolute coordinates
                 double x = parseCoordinate(player.getLocation().getX(), args[0]);
                 double y = parseCoordinate(player.getLocation().getY(), args[1]);
                 double z = parseCoordinate(player.getLocation().getZ(), args[2]);
 
+                // Floor coordinates and center on block (for nicer spawn alignment)
                 spawnLocation = new Location(world,
                         Math.floor(x) + 0.5,
                         Math.floor(y),
@@ -34,7 +38,9 @@ public class SetSpawnCommand implements CommandExecutor {
                 player.sendMessage("Invalid coordinates.");
                 return true;
             }
-        } else {
+        }
+        else {
+            // If no coordinates provided, use the player's current location
             Location loc = player.getLocation();
             spawnLocation = new Location(world,
                     loc.getBlockX() + 0.5,
@@ -42,7 +48,13 @@ public class SetSpawnCommand implements CommandExecutor {
                     loc.getBlockZ() + 0.5);
         }
 
-        world.setSpawnLocation(spawnLocation.getBlockX(), spawnLocation.getBlockY(), spawnLocation.getBlockZ());
+        // Set the world's spawn point to the chosen location
+        world.setSpawnLocation(
+                spawnLocation.getBlockX(),
+                spawnLocation.getBlockY(),
+                spawnLocation.getBlockZ());
+
+        // Notify player of the new spawn location
         player.sendMessage("Spawn set to " +
                 spawnLocation.getBlockX() + ", " +
                 spawnLocation.getBlockY() + ", " +
@@ -50,13 +62,14 @@ public class SetSpawnCommand implements CommandExecutor {
         return true;
     }
 
+    // Helper method to parse coordinate input, allowing for relative (~) positions
     private double parseCoordinate(double base, String input) {
         if (input.startsWith("~")) {
             if (input.length() == 1) {
-                return base;
+                return base; //Just "~" means no offset
             }
-            return base + Double.parseDouble(input.substring(1));
+            return base + Double.parseDouble(input.substring(1)); //"~<offset>" means relative
         }
-        return Double.parseDouble(input);
+        return Double.parseDouble(input); //Absolute coordinate
     }
 }

@@ -3,6 +3,7 @@ package BlueGoose.bloxHub;
 import Commands.*;
 import Listeners.*;
 import Managers.*;
+import Utils.NametagEdit;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
