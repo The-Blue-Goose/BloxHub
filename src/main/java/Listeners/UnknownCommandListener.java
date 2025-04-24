@@ -48,9 +48,9 @@ public class UnknownCommandListener implements Listener {
         }
 
         // Block unknown commands
-        if (!knownCommands.contains(baseCommand)) {
-            event.setCancelled(true);
-            player.sendMessage(unknownMsg);
-        }
+//        if (!knownCommands.contains(baseCommand)) {
+//            event.setCancelled(true);
+//            player.sendMessage(unknownMsg);
+//        }
     }
 }
