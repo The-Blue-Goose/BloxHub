@@ -19,6 +19,7 @@ public final class BloxHub extends JavaPlugin {
         // Instantiate managers with config access
         permissionManager = new PermissionManager(this);
         unknownCommandListener = new UnknownCommandListener(this);
+        TeleportManager teleportManager = new TeleportManager();
 
         // Register event listeners
         getServer().getPluginManager().registerEvents(new SpawnJoinListener(), this);
@@ -55,6 +56,10 @@ public final class BloxHub extends JavaPlugin {
         registerCommand("fly", new FlyGodCommand());
         registerCommand("god", new FlyGodCommand());
         registerCommand("scoreboard", scoreboardCommand);
+        registerCommand("tp", new TeleportCommand());
+        registerCommand("tpa", new TeleportRequestCommand(teleportManager));
+        registerCommand("tpaccept", new TeleportAcceptCommand(teleportManager));
+        registerCommand("tph", new TeleportHereCommand());
 
         // Enable log
         getLogger().info("BloxHub is enabled!");
@@ -65,9 +70,7 @@ public final class BloxHub extends JavaPlugin {
         getLogger().info("BloxHub is disabled!");
     }
 
-    /**
-     * Helper method to register commands and track them for unknown command handling
-     */
+    //Helper method to register commands and track them for unknown command handling
     private void registerCommand(String name, Object executor) {
         if (getCommand(name) != null) {
             getCommand(name).setExecutor((org.bukkit.command.CommandExecutor) executor);

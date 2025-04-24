@@ -1,4 +1,6 @@
-# config.yml
+# BloxHub Config - PreRelease
+# BloxHub is created by The_Blue_Goose and Jxsh
+# This plugin was made for the HotBlox Server
 
 # chat messages
 messages:
@@ -23,19 +25,22 @@ world_spawns:
 # Server Info Display Config
 tablist:
   header: |
-    §a§lHOT §2§lBLOX
+    §7Welcome to §a§lHot§2§lBlox
   footer: |
-    §9Discord: &7discord.jxsh.space 
+    §2
+    §9Discord: §7discord.jxsh.space
 
 scoreboard:
   title: "§a§lHOT §2§lBLOX"
   lines:
-    - "§7------------------"
-    - "§ePlayer: §f%player%"
-    - "§eOnline: §f%online_players% / %max_players%"
+    - "§7§m------------------"
+    - "§ePlayer: §f%player_name%"
+    - "§eOnline: §f%server_online% / %server_max_players%"
     - "§7"
+    - "§eRank: §b%luckperms_primary_group_name%"
+    - "§9"
     - "§bdev.jxsh.space"
-    - "§7------------------"
+    - "§7§m------------------"
 
 # Permission nodes for custom suffixes/prefixes
 permission_nodes:

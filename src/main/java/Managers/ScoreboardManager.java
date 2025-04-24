@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 import org.bukkit.ChatColor;
+import Utils.PlaceholderUtil;
 
 import java.util.List;
 
@@ -26,10 +27,11 @@ public class ScoreboardManager {
 
         for (String line : lines) {
             // Replace placeholders
-            line = line
-                    .replace("%player%", player.getName())
-                    .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
-                    .replace("%max_players%", String.valueOf(Bukkit.getMaxPlayers()));
+//            line = line
+//                    .replace("%player%", player.getName())
+//                    .replace("%online_players%", String.valueOf(Bukkit.getOnlinePlayers().size()))
+//                    .replace("%max_players%", String.valueOf(Bukkit.getMaxPlayers()));
+            line = PlaceholderUtil.setPlaceholders(player, line);
 
             // Make sure the line is unique. You can add invisible color codes
             String uniqueEntry = line + ChatColor.values()[score % ChatColor.values().length];

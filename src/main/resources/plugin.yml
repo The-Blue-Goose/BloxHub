@@ -2,6 +2,7 @@ name: BloxHub
 version: '0.1.0-TestVer'
 main: BlueGoose.bloxHub.BloxHub
 authors: [The_Blue_Goose, Jxsh]
+softdepend: [PlaceholderAPI]
 api-version: '1.18'
 
 commands:
@@ -14,7 +15,7 @@ commands:
     description: Teleports you to the world spawn point.
     usage: /<command>
     permission: blox.spawn
-    aliases: [s, hub, lobby]
+    aliases: [lobby]
 
   gm:
     description: Toggles or sets your gamemode.
@@ -36,6 +37,26 @@ commands:
     description: Sets gamemode to spectator.
     usage: /<command> [player]
     permission: blox.gamemode
+
+  tp:
+    description: Teleport to players or teleport others.
+    usage: /tp [player|x y z] [player]
+    permission: blox.tp
+    aliases: [tppos, teleport]
+  tpa:
+    description: Request to teleport to another player.
+    usage: /tpa [player]
+    permission: blox.tpa
+    aliases: [tpask]
+  tpaccept:
+    description: Accept a teleport request.
+    usage: /tpaccept
+    permission: blox.tpaccept
+  tph:
+    description: Teleport another player to you.
+    usage: /tph [player]
+    permission: blox.tph
+    aliases: [s, tphere]
 
   scoreboard:
     description: Toggle your scoreboard visibility.
@@ -77,6 +98,14 @@ permissions:
   blox.fly:
     default: op
   blox.god:
+    default: op
+  blox.tp:
+    default: op
+  blox.tpa:
+    default: true
+  blox.tpaccept:
+    default: true
+  blox.tph:
     default: op
   blox.bypass.blockedcommands:
     description: Allows use of blocked server commands like /pl and /version
