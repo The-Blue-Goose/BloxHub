@@ -48,3 +48,5 @@ public class ReloadCommand implements CommandExecutor {
         return true;
     }
 }
+
+//TODO: support animated tablist config update

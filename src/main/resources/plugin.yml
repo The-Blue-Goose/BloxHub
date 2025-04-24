@@ -90,7 +90,7 @@ commands:
   bloxreload:
     description: Reloads BloxHub nametags and config
     usage: /bloxreload
-    permission: bloxhub.reload
+    permission: blox.reload
     permission-message: You do not have permission to use this command.
 
 permissions:
