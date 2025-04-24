@@ -7,51 +7,38 @@ import org.bukkit.scoreboard.*;
 
 public class NametagEdit {
 
-    private final Scoreboard scoreboard;
-    private final Team team;
+    private static final String TEAM_NAME = "hotblox";
+    private static Team team;
 
-    public NametagEdit(String teamName, String displayName, ChatColor color) {
-        this.scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+    public static void setupTeam() {
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        // Register or get existing team
-        Team existing = scoreboard.getTeam(teamName);
-        if (existing != null) existing.unregister();
+        // Unregister if exists (only once)
+        if (scoreboard.getTeam(TEAM_NAME) != null) {
+            scoreboard.getTeam(TEAM_NAME).unregister();
+        }
 
-        this.team = scoreboard.registerNewTeam(teamName);
-        team.setDisplayName(displayName);
-        team.setColor(color);
+        team = scoreboard.registerNewTeam(TEAM_NAME);
+        team.setDisplayName("HotBlox");
+        team.setPrefix(ChatColor.translateAlternateColorCodes('&', "&a[HOT] &4"));
+        team.setSuffix(""); // Optional
+        team.setColor(ChatColor.GREEN);
         team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.ALWAYS);
         team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
     }
 
-    public NametagEdit(String teamName, String displayName, String prefix, String suffix) {
-        this.scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+    public static void addPlayer(Player player) {
+        if (team == null) {
+            setupTeam(); // Ensure the team exists
+        }
 
-        Team existing = scoreboard.getTeam(teamName);
-        if (existing != null) existing.unregister();
-
-        this.team = scoreboard.registerNewTeam(teamName);
-        team.setDisplayName(displayName);
-        team.setPrefix(ChatColor.translateAlternateColorCodes('&', prefix));
-        team.setSuffix(ChatColor.translateAlternateColorCodes('&', suffix));
-        team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.ALWAYS);
-        team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
+        team.addPlayer(player);
+        player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
     }
 
-    public NametagEdit(String teamName, String displayName, String prefix) {
-        this(teamName, displayName, prefix, "");
-    }
-
-    public void addPlayer(Player player) {
-        team.addEntry(player.getName());
-        player.setScoreboard(scoreboard);
-    }
-
-    public void updateAll() {
+    public static void updateAll() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.setScoreboard(scoreboard);
+            player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
         }
     }
 }
-
-

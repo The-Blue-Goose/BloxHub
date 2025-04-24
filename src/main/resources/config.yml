@@ -11,20 +11,9 @@ chat:
   first_join_message: "§bWelcome %player% to BloxHub for the first time!"
   death_message: "§c%player% died."
 
-# Default spawn locations per world
-world_spawns:
-  world:
-    x: 0.5
-    y: 64
-    z: 0.5
-  world_nether:
-    x: 0.5
-    y: 64
-    z: 0.5
-  world_the_end:
-    x: 100
-    y: 128
-    z: 100
+# Command Config
+teleport:
+  timeout-seconds: 60   #time to accept tpa request (seconds)
 
 # Server Info Display Config
 tablist:

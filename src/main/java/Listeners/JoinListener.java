@@ -11,10 +11,12 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        NametagEdit tag = new NametagEdit("hotblox", "HotBlox", "§a[HOT] ");
-        tag.addPlayer(player);
-        tag.updateAll();
+        Player joiningPlayer = event.getPlayer();
+
+        // Add the joining player to the team
+        NametagEdit.addPlayer(joiningPlayer);
+
+        // Update scoreboards for *all* players to see the tags correctly
+        NametagEdit.updateAll();
     }
 }

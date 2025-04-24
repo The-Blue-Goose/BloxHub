@@ -52,6 +52,11 @@ commands:
     description: Accept a teleport request.
     usage: /tpaccept
     permission: blox.tpaccept
+  tpdeny:
+    description: Deny a teleport request.
+    usage: /tpdeny [player]
+    permission: blox.tpdeny
+    aliases: [tpno]
   tph:
     description: Teleport another player to you.
     usage: /tph [player]
@@ -82,6 +87,12 @@ commands:
     usage: /<command> [player]
     permission: blox.god
 
+  bloxreload:
+    description: Reloads BloxHub nametags and config
+    usage: /bloxreload
+    permission: bloxhub.reload
+    permission-message: You do not have permission to use this command.
+
 permissions:
   blox.setspawn:
     default: op
@@ -105,7 +116,11 @@ permissions:
     default: true
   blox.tpaccept:
     default: true
+  blox.tpdeny:
+    default: true
   blox.tph:
+    default: op
+  blox.bloxreload:
     default: op
   blox.bypass.blockedcommands:
     description: Allows use of blocked server commands like /pl and /version

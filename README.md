@@ -10,7 +10,7 @@
   - `/gms` — Survival mode
   - `/gma` — Adventure mode
   - `/gmsp` — Spectator mode
-  - `/gm <0-3>` — Universal gamemode command (bugged)
+  - `/gm <0-3>` — Universal gamemode command
   - `/fly` — Toggle flight
   - `/god` — Toggle invincibility
   - `/heal` — Fully heal yourself or another player

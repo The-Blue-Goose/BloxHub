@@ -29,10 +29,24 @@ public class GamemodeCommand implements CommandExecutor {
                 targetMode = GameMode.SPECTATOR;
                 break;
             case "gm":
-                if (args.length == 0) {
-                    sender.sendMessage("§cUsage: /gm <mode> [player]");
+                if (args.length == 0) { // No arguments — gamemode toggle
+                    if (!(sender instanceof Player)) {
+                        sender.sendMessage("§cOnly players can toggle their own gamemode.");
+                        return true;
+                    }
+                    Player player = (Player) sender;
+                    GameMode current = player.getGameMode();
+
+                    if (current == GameMode.CREATIVE || current == GameMode.SPECTATOR) {
+                        targetMode = GameMode.ADVENTURE;
+                    } else {
+                        targetMode = GameMode.CREATIVE;
+                    }
+
+                    player.setGameMode(targetMode);
+                    player.sendMessage("§aYour gamemode has been toggled to §e" + targetMode.name() + "§a.");
                     return true;
-                }
+                } // Yes Arguments - parse as usual
                 switch (args[0].toLowerCase()) {
                     case "c": case "1": targetMode = GameMode.CREATIVE; break;
                     case "s": case "0": targetMode = GameMode.SURVIVAL; break;

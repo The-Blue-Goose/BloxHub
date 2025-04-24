@@ -19,7 +19,7 @@ public final class BloxHub extends JavaPlugin {
         // Instantiate managers with config access
         permissionManager = new PermissionManager(this);
         unknownCommandListener = new UnknownCommandListener(this);
-        TeleportManager teleportManager = new TeleportManager();
+        TeleportManager teleportManager = new TeleportManager(this);
 
         // Register event listeners
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
@@ -38,11 +38,7 @@ public final class BloxHub extends JavaPlugin {
                 new ScoreboardListener(scoreboardManager, scoreboardCommand), this);
 
         // NameTagEdit
-        NametagEdit tag = new NametagEdit("hotblox", "HotBlox", "&a[HOT] ", "");
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            tag.addPlayer(player);
-        }
-        tag.updateAll();
+        NametagEdit.setupTeam(); // Setup team once on enable
 
         // Commands - setup and register them + add to unknownCommandListener
         registerCommand("setspawn", new SetSpawnCommand());
@@ -60,7 +56,15 @@ public final class BloxHub extends JavaPlugin {
         registerCommand("tp", new TeleportCommand());
         registerCommand("tpa", new TeleportRequestCommand(teleportManager));
         registerCommand("tpaccept", new TeleportAcceptCommand(teleportManager));
+        registerCommand("tpdeny", new TeleportDenyCommand(teleportManager));
         registerCommand("tph", new TeleportHereCommand());
+        registerCommand("bloxreload", new ReloadCommand(scoreboardManager, scoreboardCommand));
+
+        //Reset tags if plugin gets reloaded (using plugman)
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            NametagEdit.addPlayer(player);
+        }
+        NametagEdit.updateAll();
 
         // Enable log
         getLogger().info("BloxHub is enabled!");
