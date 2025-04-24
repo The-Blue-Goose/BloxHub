@@ -1,9 +1,12 @@
 package BlueGoose.bloxHub;
 
+import java.util.List;
+import java.util.ArrayList;
 import Commands.*;
 import Listeners.*;
 import Managers.*;
 import Utils.NametagEdit;
+import Utils.TabListAnimator;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -60,6 +63,27 @@ public final class BloxHub extends JavaPlugin {
         registerCommand("tpdeny", new TeleportDenyCommand(teleportManager));
         registerCommand("tph", new TeleportHereCommand());
         registerCommand("bloxreload", new ReloadCommand(scoreboardManager, scoreboardCommand));
+
+        // Animated TabList setup
+        boolean animateTablist = getConfig().getBoolean("tablist.Animation", false);
+
+        if (animateTablist) {
+            List<String> headers = new ArrayList<>();
+            List<String> footers = new ArrayList<>();
+
+            int index = 1;
+            while (getConfig().isConfigurationSection("tablist." + index)) {
+                headers.add(getConfig().getString("tablist." + index + ".header", ""));
+                footers.add(getConfig().getString("tablist." + index + ".footer", ""));
+                index++;
+            }
+
+            TabListAnimator animator = new TabListAnimator(this, headers, footers, 1); // animate every 1 second
+            animator.start();
+        } else {
+            // Fallback: set static tablist (use onJoin listener)
+            getServer().getPluginManager().registerEvents(new TabListListener(this), this);
+        }
 
         //Reset tags if plugin gets reloaded (using plugman)
         for (Player player : Bukkit.getOnlinePlayers()) {

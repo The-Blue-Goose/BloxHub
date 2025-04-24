@@ -15,13 +15,23 @@ chat:
 teleport:
   timeout-seconds: 60   #time to accept tpa request (seconds)
 
-# Server Info Display Config
+# Server Info Display Config (animates between 1 and 2)
 tablist:
-  header: |
-    §7Welcome to §a§lHot§2§lBlox
-  footer: |
-    §2
-    §9Discord: §7discord.jxsh.space
+  # If animation is false, it will use the config at "1" only
+  # If animation is on. it will cycle between 1 and 2
+  Animation: true
+  1:
+    header: |
+      §7Welcome to §a§lHot§2§lBlox
+    footer: |
+      §2
+      §9Discord: §7discord.jxsh.space
+  2:
+    header: |
+      §7Welcome to §2§lHot§a§lBlox
+    footer: |
+      §2
+      §9Discord: §7discord.jxsh.space
 
 scoreboard:
   title: "§a§lHOT §2§lBLOX"
